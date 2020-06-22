@@ -72,6 +72,7 @@ struct mp_subtitle_opts {
     float sub_fps;
     float sub_speed;
     int forced_subs_only;
+    int forced_subs_only_current;
     int stretch_dvd_subs;
     int stretch_image_subs;
     int image_subs_video_res;
@@ -250,6 +251,7 @@ typedef struct MPOpts {
     int stream_id[2][STREAM_TYPE_COUNT];
     char **stream_lang[STREAM_TYPE_COUNT];
     int stream_auto_sel;
+    int subs_with_matching_audio;
     int audio_display;
     char **display_tags;
 

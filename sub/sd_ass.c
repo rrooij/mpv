@@ -307,8 +307,16 @@ static bool check_packet_seen(struct sd *sd, int64_t pos)
 
 static void decode(struct sd *sd, struct demux_packet *packet)
 {
+    struct mp_subtitle_opts *opts = sd->opts;
     struct sd_ass_priv *ctx = sd->priv;
     ASS_Track *track = ctx->ass_track;
+
+    // Currently no supported text sub formats support a distinction between forced
+    // and unforced lines, so we just assume everything's unforced and discard everything.
+    // If we ever see a format that makes this distinction, we can add support here.
+    if (opts->forced_subs_only_current)
+        return;
+
     if (ctx->converter) {
         if (!sd->opts->sub_clear_on_seek && packet->pos >= 0 &&
             check_packet_seen(sd, packet->pos))
