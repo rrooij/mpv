@@ -135,6 +135,8 @@ before_install:
                 brew install luajit
                 brew install libass
                 brew install ffmpeg
+            elif [[ $TRAVIS_OSX_IMAGE" == "xcode10.1" ]]; then
+                brew install python
             else
                 brew link --overwrite python
             fi
